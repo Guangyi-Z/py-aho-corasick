@@ -28,3 +28,5 @@ def test_content(response):
     """
     # from bs4 import BeautifulSoup
     # assert 'GitHub' in BeautifulSoup(response.content).title.string
+    py_aho_corasick.init_trie(['cash', 'shew', 'ew'])
+    assert len(py_aho_corasick.get_keywords_found("cashew")) == 3

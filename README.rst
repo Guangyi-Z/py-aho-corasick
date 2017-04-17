@@ -22,19 +22,23 @@ py-aho-corasick
 
 
 * Free software: MIT license
-* Documentation: https://py-aho-corasick.readthedocs.io.
-
+* The prototype is inspired by and borrowed from [Carolyn Shen](http://carshen.github.io/data-structures/algorithms/2014/04/07/aho-corasick-implementation-in-python.html)
 
 Features
 --------
 
-* TODO
+* Aho-Corasick's Trie structure and Failure State Transition
+* String searching algorithm for multi-pattern keywords
 
-Credits
----------
+Usage
+--------
 
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+TODO
 
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
 
+TODO
+--------
+
+* <keyword,value> pairs
+* Unicode support
+* py2 && py3 support
