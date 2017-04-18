@@ -30,18 +30,36 @@ Features
 * Aho-Corasick's Trie structure and Failure State Transition
 * String searching algorithm for multi-pattern keywords
 * Pure Python implementation
+* Python2 && Python3 support
 
 Usage
 --------
 
-TODO
+::
+
+    from py_aho_corasick import py_aho_corasick
+
+    # keywords only
+    py_aho_corasick.init_trie(['cash', 'shew', 'ew'])
+    text = "cashew"
+    for idx,k,v in py_aho_corasick.get_keywords_found(text):
+        assert text[idx:idx+len(k)] == k
+
+    # keywords and values
+    kv = [('cash',1), ('shew',2), ('ew',3)]
+    py_aho_corasick.init_trie(kv)
+    text = "cashew"
+    for idx,k,v in py_aho_corasick.get_keywords_found(text):
+        assert text[idx:idx+len(k)] == k
+        assert v == dict(kv)[k]
+
 
 Performance
 --------
 
-Compared with `pyahocorasick <https://github.com/WojciechMula/pyahocorasick>`_
+Compared with `pyahocorasick (C extention) <https://github.com/WojciechMula/pyahocorasick>`_
 
-You can run the testing script to get this:
+You can run the testing script to get this::
 
     # Requirements:
     # pip install pyahocorasick
@@ -50,9 +68,17 @@ You can run the testing script to get this:
 * pyahocorasick: text of 1000000 length, 1000 keywords, building time 0.026426076889038086 and searching time cost 0.047805070877075195
 * py_aho_corasick: text of 1000000 length, 1000 keywords, building time 0.47435593605041504 and searching time cost 4.24287486076355
 
+Sorry about the poor performance :-(
+
+Development
+--------
+
+::
+    # testing against py2 and py3
+    tox
+
+
 TODO
 --------
 
-* Unicode support
-* py2 && py3 support
 * Pickle test
