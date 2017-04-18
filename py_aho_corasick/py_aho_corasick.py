@@ -3,25 +3,36 @@
 from collections import deque
 
 
-AdjList = []
+AdjList = None
 
 
 def init_trie(keywords):
     """ creates a trie of keywords, then sets fail transitions """
     create_empty_trie()
-    add_keywords(keywords)
+    if isinstance(keywords[0], tuple):
+        add_keywords_and_values(keywords)
+    else:
+        add_keywords(keywords)
     set_fail_transitions()
 
 
 def create_empty_trie():
     """ initalize the root of the trie """
+    global AdjList
+    AdjList = list()
     AdjList.append({'value':'', 'next_states':[],'fail_state':0,'output':[]})
 
 
 def add_keywords(keywords):
     """ add all keywords in list of keywords """
     for keyword in keywords:
-        add_keyword(keyword)
+        add_keyword(keyword, None)
+
+
+def add_keywords_and_values(kvs):
+    """ add all keywords and values in list of (k,v) """
+    for k,v in kvs:
+        add_keyword(k,v)
 
 
 def find_next_state(current_state, value):
@@ -31,7 +42,7 @@ def find_next_state(current_state, value):
     return None
 
 
-def add_keyword(keyword):
+def add_keyword(keyword, value):
     """ add a keyword to the trie and mark output at the last node """
     current_state = 0
     j = 0
@@ -49,7 +60,7 @@ def add_keyword(keyword):
         AdjList.append(node)
         AdjList[current_state]["next_states"].append(len(AdjList) - 1)
         current_state = len(AdjList) - 1
-    AdjList[current_state]["output"].append(keyword)
+    AdjList[current_state]["output"].append((keyword,value))
 
 
 def set_fail_transitions():
@@ -84,8 +95,8 @@ def get_keywords_found(line):
         if current_state is None:
             current_state = 0
         else:
-            for w in AdjList[current_state]["output"]:
-                keywords_found.append((i-len(w) + 1, w, None))
+            for k,v in AdjList[current_state]["output"]:
+                keywords_found.append((i-len(k) + 1, k, v))
 
     return keywords_found
 
