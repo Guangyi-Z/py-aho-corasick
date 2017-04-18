@@ -19,7 +19,7 @@ test_requirements = [
 
 setup(
     name='py_aho_corasick',
-    version='1.0.0',
+    version='1.1.0',
     description="py-aho-corasick",
     long_description=readme + '\n\n' + history,
     author="JanFan",

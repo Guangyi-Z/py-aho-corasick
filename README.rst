@@ -27,10 +27,10 @@ py-aho-corasick
 Features
 --------
 
-* String searching algorithm for multi-pattern keywords
 * Pure Python implementation
 * Python2 && Python3 support
 * Unicode && UTF-8 encoding support
+* Pickle-able serialization
 
 Usage
 --------
@@ -44,16 +44,16 @@ Usage::
     from py_aho_corasick import py_aho_corasick
 
     # keywords only
-    py_aho_corasick.init_trie(['cash', 'shew', 'ew'])
+    A = py_aho_corasick.Automaton(['cash', 'shew', 'ew'])
     text = "cashew"
-    for idx,k,v in py_aho_corasick.get_keywords_found(text):
+    for idx,k,v in A.get_keywords_found(text):
         assert text[idx:idx+len(k)] == k
 
     # keywords and values
     kv = [('cash',1), ('shew',2), ('ew',3)]
-    py_aho_corasick.init_trie(kv)
+    A = py_aho_corasick.Automaton(kv)
     text = "cashew"
-    for idx,k,v in py_aho_corasick.get_keywords_found(text):
+    for idx,k,v in A.get_keywords_found(text):
         assert text[idx:idx+len(k)] == k
         assert v == dict(kv)[k]
 
@@ -86,4 +86,4 @@ Run tests::
 TODO
 --------
 
-* Pickle test
+* Performance optimization

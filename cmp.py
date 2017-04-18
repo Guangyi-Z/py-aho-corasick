@@ -45,11 +45,11 @@ if __name__ == '__main__':
 
     # py_aho_corasick
     start_t = time.time()
-    py_aho_corasick.init_trie(keywords)
+    A = py_aho_corasick.Automaton(keywords)
     delta_build2 = time.time() - start_t
 
     start_t = time.time()
-    keywords = py_aho_corasick.get_keywords_found(text)
+    keywords = A.get_keywords_found(text)
     cnt2 = 0
     for idx,k,v in keywords:
         assert text[idx:idx+len(k)] == k
