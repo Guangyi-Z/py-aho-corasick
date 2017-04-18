@@ -72,7 +72,7 @@ def set_fail_transitions():
 
 
 def get_keywords_found(line):
-    """ returns true if line contains any keywords in trie """
+    """ returns true if line contains any keywords in trie, format: (start_idx,kw,value) """
     line = line.lower()
     current_state = 0
     keywords_found = []
@@ -85,7 +85,7 @@ def get_keywords_found(line):
             current_state = 0
         else:
             for w in AdjList[current_state]["output"]:
-                keywords_found.append({"index":i-len(w) + 1,"word":w})
+                keywords_found.append((i-len(w) + 1, w, None))
 
     return keywords_found
 

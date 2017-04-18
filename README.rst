@@ -29,12 +29,26 @@ Features
 
 * Aho-Corasick's Trie structure and Failure State Transition
 * String searching algorithm for multi-pattern keywords
+* Pure Python implementation
 
 Usage
 --------
 
 TODO
 
+Performance
+--------
+
+Compared with [pyahocorasick](https://github.com/WojciechMula/pyahocorasick).
+
+You can run the testing script to get this:
+
+```bash
+python cmp.py
+```
+
+* pyahocorasick: text of 1000000 length, 1000 keywords, and searching time cost 0.06532979011535645
+* py_aho_corasick: text of 1000000 length, 1000 keywords, and searching time cost 4.912902116775513
 
 TODO
 --------
@@ -42,3 +56,4 @@ TODO
 * <keyword,value> pairs
 * Unicode support
 * py2 && py3 support
+* Pickle test
