@@ -35,6 +35,10 @@ Features
 Usage
 --------
 
+Install::
+
+    pip install py_aho_corasick
+
 Usage::
 
     from py_aho_corasick import py_aho_corasick
