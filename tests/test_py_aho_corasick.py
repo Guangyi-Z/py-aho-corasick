@@ -14,15 +14,6 @@ import pytest
 from py_aho_corasick import py_aho_corasick
 
 
-@pytest.fixture
-def response():
-    """Sample pytest fixture.
-    See more at: http://doc.pytest.org/en/latest/fixture.html
-    """
-    # import requests
-    # return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
-
-
 def test_keywords_only():
     py_aho_corasick.init_trie(['cash', 'shew', 'ew'])
     text = "cashew"
@@ -37,6 +28,30 @@ def test_keywords_and_values():
     kv_dict = dict(kv)
     py_aho_corasick.init_trie(kv)
     text = "cashew"
+    keywords = py_aho_corasick.get_keywords_found(text)
+    for idx,k,v in keywords:
+        assert text[idx:idx+len(k)] == k
+        assert v == kv_dict[k]
+    assert len(keywords) == 3
+
+
+def test_unicode():
+    kv = [(u'哈哈',1), (u'你好',2), (u'算我shu',3)]
+    kv_dict = dict(kv)
+    py_aho_corasick.init_trie(kv)
+    text = u'你好哈哈算我shu咯'
+    keywords = py_aho_corasick.get_keywords_found(text)
+    for idx,k,v in keywords:
+        assert text[idx:idx+len(k)] == k
+        assert v == kv_dict[k]
+    assert len(keywords) == 3
+
+
+def test_utf8():
+    kv = [(u'哈哈'.encode('utf8'),1), (u'你好'.encode('utf8'),2), (u'算我shu'.encode('utf8'),3)]
+    kv_dict = dict(kv)
+    py_aho_corasick.init_trie(kv)
+    text = u'你好哈哈算我shu咯'.encode('utf8')
     keywords = py_aho_corasick.get_keywords_found(text)
     for idx,k,v in keywords:
         assert text[idx:idx+len(k)] == k
