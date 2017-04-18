@@ -44,11 +44,13 @@ Compared with [pyahocorasick](https://github.com/WojciechMula/pyahocorasick).
 You can run the testing script to get this:
 
 ```bash
+# Requirements:
+# pip install pyahocorasick
 python cmp.py
 ```
 
-* pyahocorasick: text of 1000000 length, 1000 keywords, and searching time cost 0.06532979011535645
-* py_aho_corasick: text of 1000000 length, 1000 keywords, and searching time cost 4.912902116775513
+* pyahocorasick: text of 1000000 length, 1000 keywords, building time 0.026426076889038086 and searching time cost 0.047805070877075195
+* py_aho_corasick: text of 1000000 length, 1000 keywords, building time 0.47435593605041504 and searching time cost 4.24287486076355
 
 TODO
 --------

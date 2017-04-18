@@ -33,25 +33,31 @@ if __name__ == '__main__':
     for idx, key in enumerate(keywords):
         A.add_word(key, (idx, key))
     A.make_automaton()
+    delta_build1 = time.time() - start_t
+
+    start_t = time.time()
     cnt1 = 0
     for end_index, (insert_order, original_value) in A.iter(text):
         start_index = end_index - len(original_value) + 1
         assert haystack[start_index:start_index + len(original_value)] == original_value
         cnt1 += 1
-    delta1 = time.time() - start_t
+    delta_search1 = time.time() - start_t
 
     # py_aho_corasick
     start_t = time.time()
     py_aho_corasick.init_trie(keywords)
+    delta_build2 = time.time() - start_t
+
+    start_t = time.time()
     keywords = py_aho_corasick.get_keywords_found(text)
     cnt2 = 0
     for idx,k,v in keywords:
         assert text[idx:idx+len(k)] == k
         cnt2 += 1
-    delta2 = time.time() - start_t
+    delta_search2 = time.time() - start_t
 
     assert cnt1 == cnt2
 
     # output
-    print('pyahocorasick: text of {0} length, {1} keywords, and searching time cost {2}'.format(N,NW,delta1))
-    print('py_aho_corasick: text of {0} length, {1} keywords, and searching time cost {2}'.format(N,NW,delta2))
+    print('pyahocorasick: text of {0} length, {1} keywords, building time {2} and searching time cost {3}'.format(N,NW,delta_build1,delta_search1))
+    print('py_aho_corasick: text of {0} length, {1} keywords, building time {2} and searching time cost {3}'.format(N,NW,delta_build2,delta_search2))
