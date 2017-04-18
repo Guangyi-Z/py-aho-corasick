@@ -27,15 +27,15 @@ py-aho-corasick
 Features
 --------
 
-* Aho-Corasick's Trie structure and Failure State Transition
 * String searching algorithm for multi-pattern keywords
 * Pure Python implementation
 * Python2 && Python3 support
+* Unicode && UTF-8 encoding support
 
 Usage
 --------
 
-::
+Usage::
 
     from py_aho_corasick import py_aho_corasick
 
@@ -73,7 +73,8 @@ Sorry about the poor performance :-(
 Development
 --------
 
-::
+Run tests::
+
     # testing against py2 and py3
     tox
 
