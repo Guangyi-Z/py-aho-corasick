@@ -92,10 +92,12 @@ You can run the testing script to get this::
     # pip install pyahocorasick
     python cmp.py
 
-* pyahocorasick: text of 1000000 length, 1000 keywords, building time 0.026426076889038086 and searching time cost 0.047805070877075195
-* py_aho_corasick: text of 1000000 length, 1000 keywords, building time 0.47435593605041504 and searching time cost 4.24287486076355
+* pyahocorasick: text of 1000000 length, 50000 keywords, building time 0.20450282096862793 and searching time cost 0.18479514122009277
+* py_aho_corasick: text of 1000000 length, 50000 keywords, building time 3.971259117126465 and searching time cost 10.219590902328491
+* brute force: text of 1000000 length, 50000 keywords, building time 0 and searching time cost 35.875592947006226
 
-Sorry about the poor performance :-(
+Sorry about the poor performance :-(.
+Most of the time is consumed during the characters matching in Trie.
 
 Development
 --------
