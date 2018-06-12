@@ -38,7 +38,6 @@ class Automaton(object):
         """ add a keyword to the trie and mark output at the last node """
         current_state = 0
         j = 0
-        keyword = keyword.lower()
         child = self.find_next_state(current_state, keyword[j])
         while child != None:
             current_state = child
@@ -74,7 +73,6 @@ class Automaton(object):
 
     def get_keywords_found(self, line):
         """ returns true if line contains any keywords in trie, format: (start_idx,kw,value) """
-        line = line.lower()
         current_state = 0
         keywords_found = []
 
