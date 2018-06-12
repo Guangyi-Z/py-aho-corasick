@@ -90,24 +90,27 @@ class Automaton(object):
 
         return keywords_found
 
-    def export(self):
-        """ Export the internal datastructure as a NFA """
+    def export(self, sid_type=int):
+        """ Export the internal datastructure as a NFA
+
+            @sid_type cast state IDs to this type
+        """
         transitions = dict()
         states = set()
         final_states = set()
         for q1,state in enumerate(self.AdjList):
-            states.add(q1)
-            if state['output']: final_states.add(q1)
-            transitions[q1] = dict()
+            states.add(sid_type(q1))
+            if state['output']: final_states.add(sid_type(q1))
+            transitions[sid_type(q1)] = dict()
             for q2 in state['next_states']:
                 next_state = self.AdjList[q2]
                 sym = next_state['value']
-                if sym not in transitions[q1]: transitions[q1][sym] = set()
-                transitions[q1][sym].add(q2)
+                if sym not in transitions[sid_type(q1)]: transitions[sid_type(q1)][sym] = set()
+                transitions[sid_type(q1)][sym].add(sid_type(q2))
                 if next_state['fail_state'] != 0:
-                    transitions[q1][sym].add(next_state['fail_state'])
+                    transitions[sid_type(q1)][sym].add(sid_type(next_state['fail_state']))
 
-        return dict(states=states, initial_state=0,
+        return dict(states=states, initial_state=sid_type(0),
                 final_states=final_states, transitions=transitions)
 
 
