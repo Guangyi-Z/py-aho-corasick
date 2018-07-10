@@ -5,8 +5,14 @@ from collections import deque
 
 class Automaton(object):
 
-    def __init__(self, keywords):
-        """ creates a trie of keywords, then sets fail transitions """
+    def __init__(self, keywords, lowercase=False):
+        """ creates a trie of keywords, then sets fail transitions
+
+        :param keywords: trie of keywords
+        :param lowercase: convert all strings to lower case
+        """
+
+        self.lowercase = lowercase
 
         # initalize the root of the trie
         self.AdjList = list()
@@ -38,6 +44,7 @@ class Automaton(object):
         """ add a keyword to the trie and mark output at the last node """
         current_state = 0
         j = 0
+        if self.lowercase: keyword = keyword.lower()
         child = self.find_next_state(current_state, keyword[j])
         while child != None:
             current_state = child
@@ -73,6 +80,7 @@ class Automaton(object):
 
     def get_keywords_found(self, line):
         """ returns true if line contains any keywords in trie, format: (start_idx,kw,value) """
+        if self.lowercase: line = line.lower()
         current_state = 0
         keywords_found = []
 
